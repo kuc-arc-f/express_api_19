@@ -21,7 +21,19 @@ express + Turso LibSQL, sample
 TURSO_AUTH_TOKEN=""
 TURSO_URL="libsql://"
 ```
-
+***
+* table
+```
+CREATE TABLE test (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  createdAt TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP(3) NULL,
+  title TEXT NOT NULL,
+  content TEXT,
+  completed INTEGER  DEFAULT 0,
+  userId    INTEGER  DEFAULT 0 
+);
+```
 ***
 ### Start
 
