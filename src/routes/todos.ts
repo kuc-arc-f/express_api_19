@@ -54,6 +54,65 @@ router.post('/get_list', async function(req: any, res: any) {
 *
 * @return
 */
+router.post('/get', async function(req: any, res: any) {
+  try {
+    const retObj = {ret: "NG", data: [], message: ""};
+    if(req.body){
+      const body = req.body;
+console.log(body);
+    //console.log("url=", process.env.API_URL);
+      const client = await LibTurso.getClient();
+      const sql = `SELECT * FROM test WHERE id=${body.id};`;
+      const resulte = await client.execute(sql);
+//console.log(resulte.rows);
+      //@ts-ignore
+      if(resulte.rows.length > 0){
+        retObj.ret = "OK";
+        retObj.data = resulte.rows[0];
+      }
+      return res.json(retObj);
+    }
+    return res.json(retObj);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+/**
+* 
+* @param
+*
+* @return
+*/
+router.post('/delete', async function(req: any, res: any) {
+  try {
+    const retObj = {ret: "NG", data: [], message: ""};
+    if(req.body){
+      const body = req.body;
+console.log(body);
+    //console.log("url=", process.env.API_URL);
+      const client = await LibTurso.getClient();
+      const sql = `DELETE FROM test WHERE id=${body.id};`;
+      const resulte = await client.execute(sql);
+//console.log(resulte.rows);
+//      if(resulte.rows.length > 0){
+//        retObj.data = resulte.rows[0];
+//      }
+      retObj.ret = "OK";
+      return res.json(retObj);
+    }
+    return res.json(retObj);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+/**
+* 
+* @param
+*
+* @return
+*/
 router.post('/create', async function(req: any, res: any) {
   try {
     const retObj = {ret: "NG", data: [], message: ""};
